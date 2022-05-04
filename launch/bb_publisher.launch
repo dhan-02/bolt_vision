@@ -1,0 +1,15 @@
+
+<launch>
+  <arg name= "segmentation" default="0" />
+
+
+  <node name="bb_publisher" pkg="bolt_vision" type="bb_pub.py" if="$(eval arg('segmentation') == 0)">
+    <param name = "model_path" value = "$(find bolt_vision)/model/best.pt" type = "string"/>
+  </node>
+
+  <node name="bbseg_publisher" pkg="bolt_vision" type="bbseg_pub.py" if="$(arg segmentation)">
+    <param name = "model_path" value = "$(find bolt_vision)/model/best.pt" type = "string"/>
+  </node>
+
+ 
+</launch>
